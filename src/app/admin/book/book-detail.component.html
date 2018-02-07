@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row justify-content-center" *ngIf="book">
+    <div class="col-md-4 mr-5">
+      <div *ngIf="book.bookImage">
+        <a (click)="openFile(book.bookImageContentType, book.bookImage)">
+          <img [src]="'data:' + book.bookImageContentType + ';base64,' + book.bookImage" width="370px"
+               alt="book image"/>
+        </a>
+      </div>
+      <p></p>
+      <button type="submit"
+              routerLink="/admin/books"
+              class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+      </button>
+
+      <button type="button"
+              [routerLink]="['/admin/books/edit', book.bookId]"
+              class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+      </button>
+    </div>
+    <div class="col-md-5">
+      <h1>{{book.bookTitle}}</h1>
+      <dl class="row">
+        <dt class="col-6 text-secondary">Book Title</dt>
+        <dd class="col-6">{{book.bookTitle}}</dd>
+
+        <dt class="col-6 text-secondary">Book Author</dt>
+        <dd class="col-6">{{book.bookAuthor}}</dd>
+
+        <dt class="col-6 text-secondary">Book Pages</dt>
+        <dd class="col-6">{{book.bookPages}}</dd>
+
+        <dt class="col-6 text-secondary">Book Isbn</dt>
+        <dd class="col-6">{{book.bookIsbn}}</dd>
+
+        <dt class="col-6 text-secondary">Book Price</dt>
+        <dd class="col-6">{{book.bookPrice}}</dd>
+      </dl>
+      <h4>About book</h4>
+      <p align="justify">{{book.bookDescription}}</p>
+    </div>
+  </div>
+</div>
+
+
+<!--<button type="submit"-->
+<!--routerLink="/admin/books"-->
+<!--class="btn btn-info">-->
+<!--<span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>-->
+<!--</button>-->
+
+<!--<button type="button"-->
+<!--[routerLink]="['/admin/books/edit', book.bookId]"-->
+<!--class="btn btn-primary">-->
+<!--<span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>-->
+<!--</button>-->

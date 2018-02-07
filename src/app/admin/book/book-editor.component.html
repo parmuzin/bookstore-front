@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+        <div>
+          <h4>{{editing ? "Edit" : "Create"}} a Book</h4>
+        </div>
+          <div class="form-group" [hidden]="!book.bookId">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="book.bookId" readonly/>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="field_bookTitle">Book Title</label>
+            <input type="text" class="form-control" name="bookTitle" id="field_bookTitle"
+                   [(ngModel)]="book.bookTitle"/>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="field_bookAuthor">Book Author</label>
+            <input type="text" class="form-control" name="bookAuthor" id="field_bookAuthor"
+                   [(ngModel)]="book.bookAuthor"/>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="field_bookPages">Book Pages</label>
+            <input type="number" class="form-control" name="bookPages" id="field_bookPages"
+                   [(ngModel)]="book.bookPages"/>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="field_bookIsbn">Book Isbn</label>
+            <input type="text" class="form-control" name="bookIsbn" id="field_bookIsbn"
+                   [(ngModel)]="book.bookIsbn"/>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="field_bookPrice">Book Price</label>
+            <input type="number" class="form-control" name="bookPrice" id="field_bookPrice"
+                   [(ngModel)]="book.bookPrice"/>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="field_bookDescription">Book Description</label>
+            <textarea class="form-control" name="bookDescription" id="field_bookDescription"
+                      [(ngModel)]="book.bookDescription"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="field_bookImage">Book Image</label>
+            <div>
+              <img [src]="'data:' + book.bookImageContentType + ';base64,' + book.bookImage" style="max-height: 100px;"
+                   *ngIf="book.bookImage" alt="book image"/>
+              <div *ngIf="book.bookImage" class="form-text text-danger clearfix">
+                <span class="pull-left">{{book.bookImageContentType}}, {{byteSize(book.bookImage)}}</span>
+                <button type="button" (click)="clearInputImage('bookImage', 'bookImageContentType', 'fileImage')"
+                        class="btn btn-secondary btn-xs pull-right">
+                  <span class="fa fa-times"></span>
+                </button>
+              </div>
+              <input type="file" id="file_bookImage" (change)="setFileData($event, book, 'bookImage', true)"
+                     accept="image/*"/>
+            </div>
+            <input type="hidden" class="form-control" name="bookImage" id="field_bookImage"
+                   [(ngModel)]="book.bookImage"/>
+            <input type="hidden" class="form-control" name="bookImageContentType" id="field_bookImageContentType"
+                   [(ngModel)]="book.bookImageContentType"/>
+          </div>
+
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" routerLink="/admin/books">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+          </button>
+          <button type="submit" [disabled]="editForm.form.invalid" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span> {{editing ? "Save" : "Create"}}</span>
+          </button>
+      </form>
+    </div>
+  </div>
+</div>

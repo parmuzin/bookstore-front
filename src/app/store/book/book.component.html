@@ -1,0 +1,28 @@
+<main role="main" class="container">
+  <div class="row row-offcanvas row-offcanvas-right">
+    <!--<div class="col-12 col-md-9">-->
+      <div class="row">
+        <div *ngFor="let book of books" class="col-md-3">
+          <div class="card border-light mb-3">
+            <div class="card-body">
+              <p *ngIf="book.bookImage" class="mx-auto">
+                <img (click)="onSelect(book.bookId)"
+                     [src]="'data:' + book.bookImageContentType + ';base64,' + book.bookImage" height="300px"
+                     alt="book image"/>
+              </p>
+              <h2>{{book.bookPrice}} &#8381;</h2>
+              <p class="card-text">{{book.bookTitle}}<br>{{book.bookAuthor}}</p>
+              <button class="btn btn-outline-dark border border-white"
+                      (click)="addBookToOrder(book)">
+                Add to Order
+              </button>
+            </div>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+    <!--</div>&lt;!&ndash;/span&ndash;&gt;-->
+  </div><!--/row-->
+
+  <hr>
+
+</main><!--/.container-->

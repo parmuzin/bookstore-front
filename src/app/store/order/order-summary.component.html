@@ -1,0 +1,15 @@
+<div class="pull-xs-right text-white">
+  <small>
+    Your order:
+    <span *ngIf="order.bookCount > 0">
+            {{ order.bookCount }} item(s) {{ order.orderPrice | currency:"USD":"symbol":"2.2-2" }}
+        </span>
+    <span *ngIf="order.bookCount == 0">
+            (empty)
+        </span>
+  </small>
+  <button class="btn btn-sm bg-white" [disabled]="order.bookCount == 0"
+          routerLink="/order">
+    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+  </button>
+</div>

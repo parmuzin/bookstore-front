@@ -1,0 +1,66 @@
+<div class="container">
+  <h2>
+    <span>Books</span>
+  </h2>
+  <button class="btn btn-primary" routerLink="/admin/books/add">
+    Add New Book
+  </button>
+  <div class="row">
+  </div>
+  <br/>
+  <div class="table-responsive" *ngIf="books">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th><span>ID</span> <span></span></th>
+        <th><span>Book Title</span> <span></span></th>
+        <th><span>Book Author</span> <span></span></th>
+        <th><span>Book Pages</span> <span></span></th>
+        <th><span>Book Isbn</span> <span></span></th>
+        <th><span>Book Price</span> <span></span></th>
+        <th><span>Book Image</span> <span></span></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let book of books">
+        <td><a [routerLink]="['../book', book.bookId ]">{{book.bookId}}</a></td>
+        <td>{{book.bookTitle}}</td>
+        <td>{{book.bookAuthor}}</td>
+        <td>{{book.bookPages}}</td>
+        <td>{{book.bookIsbn}}</td>
+        <td>{{book.bookPrice}}</td>
+        <td>
+          <a *ngIf="book.bookImage" (click)="openFile(book.bookImageContentType, book.bookImage)">
+            <img [src]="'data:' + book.bookImageContentType + ';base64,' + book.bookImage" style="max-height: 30px;"
+                 alt="book image"/>
+          </a>
+          <span *ngIf="book.bookImage">{{book.bookImageContentType}}, {{byteSize(book.bookImage)}}</span>
+        </td>
+        <td class="text-right">
+          <div class="btn-group flex-btn-group-container">
+            <button type="submit"
+                    [routerLink]="['/admin/book', book.bookId ]"
+                    class="btn btn-info btn-sm">
+              <span class="fa fa-eye"></span>
+              <span class="d-none d-md-inline">View</span>
+            </button>
+            <button type="submit"
+                    [routerLink]="['/admin/books/edit', book.bookId]"
+                    class="btn btn-primary btn-sm">
+              <span class="fa fa-pencil"></span>
+              <span class="d-none d-md-inline">Edit</span>
+            </button>
+            <button type="submit"
+                    (click)="deleteBook(book.bookId)"
+                    class="btn btn-danger btn-sm">
+              <span class="fa fa-remove"></span>
+              <span class="d-none d-md-inline">Delete</span>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
